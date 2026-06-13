@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Bombeiros RP - Login</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: linear-gradient(45deg, #000, #300000);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    .box {
+      background: rgba(0,0,0,0.8);
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 20px red;
+      width: 300px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+    }
+
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      background: red;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    .welcome {
+      display: none;
+      font-size: 18px;
+    }
+
+    .username {
+      color: #ff3b3b;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  
+  <div id="login">
+    <h2>🚒 Bombeiros RP</h2>
+    <input type="text" id="username" placeholder="Digite seu nome">
+    <button onclick="login()">Entrar</button>
+  </div>
+
+  <div id="welcome" class="welcome">
+    🔥 Bem-vindo, <span class="username" id="showName"></span>!
+    <p>Você entrou no sistema dos Bombeiros RP</p>
+  </div>
+
+</div>
+
+<script>
+  function login() {
+    let name = document.getElementById("username").value;
+
+    if (name === "") {
+      alert("Digite seu nome!");
+      return;
+    }
+
+    // salva nome
+    localStorage.setItem("bombeiroName", name);
+
+    // mostra tela
+    document.getElementById("login").style.display = "none";
+    document.getElementById("welcome").style.display = "block";
+    document.getElementById("showName").innerText = name;
+  }
+
+  // auto login se já tiver salvo
+  window.onload = function() {
+    let saved = localStorage.getItem("bombeiroName");
+
+    if (saved) {
+      document.getElementById("login").style.display = "none";
+      document.getElementById("welcome").style.display = "block";
+      document.getElementById("showName").innerText = saved;
+    }
+  }
+</script>
+
+</body>
+</html>
