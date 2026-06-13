@@ -70,3 +70,96 @@
     box-shadow: 0 0 10px red, 0 0 20px darkred;
   }
 }
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(45deg, #000, #300000);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  overflow: hidden;
+}
+
+/* 🔴 FUNDO SIRENE */
+body::before{
+  content:"";
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:radial-gradient(circle,rgba(255,0,0,0.15),transparent),
+             radial-gradient(circle,rgba(0,60,255,0.1),transparent);
+  animation:siren 2s infinite alternate;
+  z-index:-1;
+}
+
+@keyframes siren{
+  0%{filter:hue-rotate(0deg) brightness(1);}
+  100%{filter:hue-rotate(25deg) brightness(1.3);}
+}
+
+/* LOGIN BOX */
+.box {
+  background: rgba(0,0,0,0.85);
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 25px red;
+  width: 300px;
+  animation:pulse 2s infinite;
+}
+
+/* 🔴 PULSO */
+@keyframes pulse {
+  0%{box-shadow:0 0 10px red;}
+  50%{box-shadow:0 0 35px red;}
+  100%{box-shadow:0 0 10px red;}
+}
+
+/* INPUT */
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 6px;
+  outline:none;
+}
+
+/* BOTÃO */
+button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 10px;
+  background: red;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: bold;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 15px red;
+}
+
+/* WELCOME ANIMADO */
+.welcome {
+  display: none;
+  font-size: 18px;
+  animation:fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+.username {
+  color: #ff3b3b;
+  font-weight: bold;
+  text-shadow:0 0 10px red;
+}
