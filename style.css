@@ -1,94 +1,72 @@
-
-body {
-  margin: 0;
-  font-family: Arial;
-  background: linear-gradient(45deg, #000, #300000);
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  overflow: hidden;
-}
-
-/* 🔴 FUNDO SIRENE */
-body::before{
-  content:"";
+/* FUNDO DO LOGIN */
+.login-overlay{
   position:fixed;
+  top:0;
+  left:0;
   width:100%;
-  height:100%;
-  background:radial-gradient(circle,rgba(255,0,0,0.15),transparent),
-             radial-gradient(circle,rgba(0,60,255,0.1),transparent);
-  animation:siren 2s infinite alternate;
-  z-index:-1;
+  height:100vh;
+
+  background: radial-gradient(circle at center, rgba(255,0,0,0.15), rgba(0,0,0,0.95));
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
 }
 
-@keyframes siren{
-  0%{filter:hue-rotate(0deg) brightness(1);}
-  100%{filter:hue-rotate(25deg) brightness(1.3);}
-}
+/* BOX LOGIN */
+.login-box{
+  width:320px;
+  padding:25px;
+  text-align:center;
 
-/* LOGIN BOX */
-.box {
-  background: rgba(0,0,0,0.85);
-  padding: 30px;
-  border-radius: 12px;
-  text-align: center;
+  background: rgba(0,0,0,0.8);
+  border:1px solid red;
+  border-radius:12px;
+
   box-shadow: 0 0 25px red;
-  width: 300px;
-  animation:pulse 2s infinite;
+  animation: pulseGlow 2s infinite;
 }
 
-/* 🔴 PULSO */
-@keyframes pulse {
-  0%{box-shadow:0 0 10px red;}
-  50%{box-shadow:0 0 35px red;}
-  100%{box-shadow:0 0 10px red;}
-}
+/* INPUTS */
+.login-box input{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
 
-/* INPUT */
-input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 6px;
+  border:none;
+  border-radius:6px;
   outline:none;
 }
 
 /* BOTÃO */
-button {
-  margin-top: 15px;
-  width: 100%;
-  padding: 10px;
-  background: red;
-  border: none;
-  color: white;
-  cursor: pointer;
-  border-radius: 6px;
-  font-weight: bold;
+.login-box button{
+  width:100%;
+  padding:10px;
+
+  background:red;
+  border:none;
+  color:white;
+  font-weight:bold;
+  border-radius:6px;
+
+  cursor:pointer;
   transition:0.3s;
 }
 
-button:hover{
+.login-box button:hover{
+  box-shadow:0 0 20px red;
   transform:scale(1.05);
-  box-shadow:0 0 15px red;
 }
 
-/* WELCOME ANIMADO */
-.welcome {
-  display: none;
-  font-size: 18px;
-  animation:fadeIn 1s ease forwards;
-}
-
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(10px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-.username {
-  color: #ff3b3b;
-  font-weight: bold;
-  text-shadow:0 0 10px red;
+/* 🔥 LUZ PULSANTE */
+@keyframes pulseGlow{
+  0%{
+    box-shadow: 0 0 10px red, 0 0 20px darkred;
+  }
+  50%{
+    box-shadow: 0 0 25px red, 0 0 60px red;
+  }
+  100%{
+    box-shadow: 0 0 10px red, 0 0 20px darkred;
+  }
 }
