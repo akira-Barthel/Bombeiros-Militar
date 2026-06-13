@@ -3,110 +3,190 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bombeiros Militar - Premium</title>
+<title>Bombeiros RP - Premium HUD</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial;
+}
 
 body{
   color:#fff;
-  background:
-    linear-gradient(rgba(0,0,0,0.85),rgba(20,0,0,0.9)),
-    url("https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=2000&q=80");
-  background-size:cover;
-  background-position:center;
-  background-attachment:fixed;
+  background:linear-gradient(135deg,#000,#2a0000,#000);
+  overflow-x:hidden;
 }
 
 /* HEADER */
 header{
-  background:rgba(180,0,0,0.85);
+  background:rgba(255,0,0,0.8);
   padding:18px;
   text-align:center;
-  font-size:22px;
   font-weight:bold;
+  letter-spacing:1px;
+  box-shadow:0 0 20px red;
 }
 
-/* NAV ABAS */
+/* NAV */
 nav{
   display:flex;
   justify-content:center;
-  gap:10px;
-  background:rgba(0,0,0,0.6);
-  padding:10px;
+  gap:12px;
+  padding:12px;
+  background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(10px);
 }
 
 nav button{
   background:transparent;
-  border:1px solid red;
+  border:1px solid rgba(255,0,0,0.6);
   color:#fff;
-  padding:8px 15px;
+  padding:10px 18px;
   cursor:pointer;
-  transition:.3s;
-  border-radius:6px;
+  border-radius:8px;
+  transition:0.4s;
+  position:relative;
+  overflow:hidden;
+}
+
+/* efeito brilho */
+nav button::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,0,0,0.4),transparent);
+  transition:0.5s;
+}
+
+nav button:hover::before{
+  left:100%;
 }
 
 nav button:hover{
   background:red;
+  box-shadow:0 0 15px red;
+  transform:scale(1.05);
 }
 
-/* CONTEÚDO */
+/* CONTAINER */
 .container{
-  max-width:900px;
+  max-width:950px;
   margin:auto;
-  padding:30px;
+  padding:25px;
 }
 
+/* ABAS */
+.section{
+  display:none;
+  opacity:0;
+  transform:translateY(20px) scale(0.98);
+  transition:0.5s ease;
+}
+
+/* ativa com animação */
+.section.active{
+  display:block;
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+/* CARD */
 .card{
   background:rgba(255,255,255,0.05);
-  padding:20px;
-  border-left:4px solid red;
+  border:1px solid rgba(255,0,0,0.3);
+  padding:18px;
   margin-top:15px;
-  border-radius:8px;
-  backdrop-filter:blur(8px);
-}
-
-/* MAPA */
-.map{
-  width:100%;
-  height:350px;
   border-radius:10px;
+  backdrop-filter:blur(10px);
+  box-shadow:0 0 15px rgba(255,0,0,0.2);
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 0 25px rgba(255,0,0,0.5);
+}
+
+/* TITULO */
+h2{
+  margin-bottom:10px;
+  text-shadow:0 0 10px red;
+}
+
+/* LOGIN */
+#loginScreen{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:radial-gradient(circle,#200000,#000);
+}
+
+.loginBox{
+  width:320px;
+  padding:30px;
+  background:rgba(0,0,0,0.8);
+  border:1px solid red;
+  border-radius:12px;
+  box-shadow:0 0 30px red;
+  text-align:center;
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+  0%{box-shadow:0 0 10px red;}
+  50%{box-shadow:0 0 30px red;}
+  100%{box-shadow:0 0 10px red;}
+}
+
+input{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border:none;
+  border-radius:6px;
+}
+
+button{
+  width:100%;
+  padding:10px;
   margin-top:15px;
-  position:relative;
-  overflow:hidden;
-  border:2px solid red;
-  background:url("https://upload.wikimedia.org/wikipedia/commons/8/84/BlankMap-World.svg");
-  background-size:cover;
-  opacity:0.9;
-}
-
-/* PONTOS */
-.point{
-  position:absolute;
-  width:12px;
-  height:12px;
   background:red;
-  border-radius:50%;
-  box-shadow:0 0 10px red;
+  border:none;
+  color:#fff;
+  cursor:pointer;
+  border-radius:6px;
+  font-weight:bold;
+  transition:0.3s;
 }
 
-.label{
-  position:absolute;
-  font-size:12px;
-  background:rgba(0,0,0,0.7);
-  padding:3px 6px;
-  border-radius:4px;
+button:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 15px red;
 }
-
-/* SEÇÕES */
-.section{display:none;}
-.active{display:block;}
 </style>
 </head>
 
 <body>
 
-<header>🚒 BOMBEIROS RP - CENTRAL OPERACIONAL</header>
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="loginBox">
+    <h2>🚒 Bombeiros RP</h2>
+    <input id="name" placeholder="Digite seu nome">
+    <button onclick="login()">Entrar no Sistema</button>
+  </div>
+</div>
+
+<!-- SISTEMA -->
+<div id="app" style="display:none;">
+
+<header>🚒 CENTRAL OPERACIONAL - BOMBEIROS RP</header>
 
 <nav>
   <button onclick="show('sobre')">Corporação</button>
@@ -117,176 +197,83 @@ nav button:hover{
 
 <div class="container">
 
-<!-- CORPORAÇÃO -->
 <div id="sobre" class="section active">
-  <h2>🚒 Corporação</h2>
+  <h2>Corporação</h2>
   <div class="card">
-    Corpo de Bombeiros RP focado em salvar vidas, combater incêndios e manter a ordem em emergências da cidade.
+    Corpo de Bombeiros RP focado em salvar vidas e atuar em emergências.
   </div>
 </div>
 
-<!-- MAPA -->
 <div id="mapa" class="section">
-  <h2>🗺️ Mapa Operacional</h2>
-
-  <div class="map">
-
-    <!-- Quartel -->
-    <div class="point" style="top:60%;left:45%;"></div>
-    <div class="label" style="top:62%;left:48%;">Quartel Central</div>
-
-    <!-- Hospital -->
-    <div class="point" style="top:30%;left:70%;"></div>
-    <div class="label" style="top:32%;left:73%;">Hospital</div>
-
-    <!-- Base Secundária -->
-    <div class="point" style="top:75%;left:20%;"></div>
-    <div class="label" style="top:77%;left:23%;">Base Operacional</div>
-
-  </div>
-
+  <h2>Mapa Operacional</h2>
   <div class="card">
-    📌 Pontos estratégicos ativos da corporação na cidade.
+    Quartel central, hospital e bases estratégicas da cidade.
   </div>
 </div>
 
-<!-- REGRAS -->
 <div id="regras" class="section">
-  <h2>📋 Regras</h2>
+  <h2>Regras</h2>
   <div class="card">
-    • Respeito à hierarquia<br>
-    • Prioridade em chamados<br>
-    • Sem uso indevido de viaturas<br>
-    • Disciplina total em operação
+    • Respeito total à hierarquia<br>
+    • Prioridade em emergências<br>
+    • Disciplina operacional obrigatória
   </div>
 </div>
 
-<!-- RECRUTAMENTO -->
 <div id="recrutamento" class="section">
-  <h2>🧑‍🚒 Recrutamento</h2>
+  <h2>Recrutamento</h2>
   <div class="card">
-    Faça parte da elite dos bombeiros da cidade.<br><br>
-    <button style="padding:10px;background:red;color:#fff;border:none;border-radius:6px;cursor:pointer;">
-      INSCREVER-SE
-    </button>
+    Faça parte da elite dos bombeiros RP da cidade.
   </div>
 </div>
 
 </div>
+</div>
 
 <script>
-function show(id){
-  let sections = document.querySelectorAll('.section');
-  sections.forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+
+function login(){
+  let name = document.getElementById("name").value;
+
+  if(!name){
+    alert("Digite seu nome");
+    return;
+  }
+
+  localStorage.setItem("user", name);
+
+  document.getElementById("loginScreen").style.opacity = "0";
+
+  setTimeout(()=>{
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("app").style.display = "block";
+  },400);
 }
-</script>
 
-</body>
-</html>
+/* ANIMAÇÃO DE ABAS MELHORADA */
+function show(id){
+  let sections = document.querySelectorAll(".section");
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Bombeiros Militar - Login</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      background: linear-gradient(45deg, #000, #300000);
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-    }
+  sections.forEach(sec=>{
+    sec.classList.remove("active");
+  });
 
-    .box {
-      background: rgba(0,0,0,0.8);
-      padding: 30px;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: 0 0 20px red;
-      width: 300px;
-    }
+  let target = document.getElementById(id);
 
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 6px;
-    }
+  // força reflow pra animação reiniciar
+  void target.offsetWidth;
 
-    button {
-      margin-top: 15px;
-      width: 100%;
-      padding: 10px;
-      background: red;
-      border: none;
-      color: white;
-      cursor: pointer;
-      border-radius: 6px;
-      font-weight: bold;
-    }
+  target.classList.add("active");
+}
 
-    .welcome {
-      display: none;
-      font-size: 18px;
-    }
-
-    .username {
-      color: #ff3b3b;
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body>
-
-<div class="box">
-  
-  <div id="login">
-    <h2>🚒 Bombeiros RP</h2>
-    <input type="text" id="username" placeholder="Digite seu nome">
-    <button onclick="login()">Entrar</button>
-  </div>
-
-  <div id="welcome" class="welcome">
-    🔥 Bem-vindo, <span class="username" id="showName"></span>!
-    <p>Você entrou no sistema dos Bombeiros RP</p>
-  </div>
-
-</div>
-
-<script>
-  function login() {
-    let name = document.getElementById("username").value;
-
-    if (name === "") {
-      alert("Digite seu nome!");
-      return;
-    }
-
-    // salva nome
-    localStorage.setItem("bombeiroName", name);
-
-    // mostra tela
-    document.getElementById("login").style.display = "none";
-    document.getElementById("welcome").style.display = "block";
-    document.getElementById("showName").innerText = name;
+/* AUTO LOGIN */
+window.onload = function(){
+  if(localStorage.getItem("user")){
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("app").style.display = "block";
   }
+}
 
-  // auto login se já tiver salvo
-  window.onload = function() {
-    let saved = localStorage.getItem("bombeiroName");
-
-    if (saved) {
-      document.getElementById("login").style.display = "none";
-      document.getElementById("welcome").style.display = "block";
-      document.getElementById("showName").innerText = saved;
-    }
-  }
 </script>
 
 </body>
