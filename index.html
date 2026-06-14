@@ -475,6 +475,31 @@ document.write(`
 </div>
 </section>
 
+<script>
+
+function tab(id){
+document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+function openCar(id){
+document.querySelectorAll(".car").forEach(c=>c.style.display="none");
+document.getElementById(id).style.display="block";
+}
+
+function openSub(id){
+document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+function back(){
+document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+document.getElementById("fit").classList.add("active");
+}
+
+</script>
+   
+
 <!-- ================= SUB ================= -->
 <section id="comandos" class="section">
 <div class="card">
@@ -565,10 +590,6 @@ document.getElementById(id).classList.add("active");
 function back(){
 document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
 document.getElementById("regras").classList.add("active");
-}
-function back(){
-document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-document.getElementById("fit").classList.add("active");
 }
 
 </script>
