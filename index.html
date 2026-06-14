@@ -383,8 +383,8 @@ document.write(`
 <div class="card">
 <h2>📜 Regras Internas</h2>
 <p>
-- Respeito aos civis acima de qualquer coisa.<br> </p>
-<p> - Respeitar a hierarquia entre os oficiais. <br>
+- Respeito aos civis acima de qualquer coisa.<br> 
+- Respeitar a hierarquia entre os oficiais. <br>
 - Utilização de armamento apenas com porte legal.<br>
 - Nunca aponte armas de fogo para outros oficiais. <br>
 - Armamento letal deve ser utilizado apenas em situações de risco de morte. <br>
@@ -439,41 +439,21 @@ document.write(`
 
 <div class="box" onclick="openFit('fit_rec')">
 <img src="https://picsum.photos/500/300?60">
-<div class="txt"><h3>Recrutadores</h3></div>
+<div class="txt">
+<h3>Recrutadores</h3>
+</div>
 </div>
 
 <div class="box" onclick="openFit('fit_ins')">
 <img src="https://picsum.photos/500/300?61">
-<div class="txt"><h3>Instrutores</h3></div>
+<div class="txt">
+<h3>Instrutores</h3>
+</div>
 </div>
 
 </div>
-
+   
 </section>
-
-<script>
-
-function tab(id){
-document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-document.getElementById(id).classList.add("active");
-}
-
-function openCar(id){
-document.querySelectorAll(".car").forEach(c=>c.style.display="none");
-document.getElementById(id).style.display="block";
-}
-
-function openSub(id){
-document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-document.getElementById(id).classList.add("active");
-}
-
-function back(){
-document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-document.getElementById("fit").classList.add("active");
-}
-
-</script>
 
 <!-- ================= FIT RECRUTADORES ================= -->
 <section id="fit_rec" class="section">
@@ -481,7 +461,7 @@ document.getElementById("fit").classList.add("active");
 <h2>🧑‍🚒 Recrutadores FIT</h2>
 <img class="bigImg" src="https://picsum.photos/900/400?70">
 <p>Avaliadores responsáveis por selecionar novos membros da corporação.</p>
-<button class="backBtn" onclick="backFit()">⬅ Voltar</button>
+<button class="backBtn" onclick="back()">⬅ Voltar</button>
 </div>
 </section>
 
@@ -491,7 +471,7 @@ document.getElementById("fit").classList.add("active");
 <h2>🎓 Instrutores FIT</h2>
 <img class="bigImg" src="https://picsum.photos/900/400?71">
 <p>Responsáveis por treinamentos e capacitação operacional.</p>
-<button class="backBtn" onclick="backFit()">⬅ Voltar</button>
+<button class="backBtn" onclick="back()">⬅ Voltar</button>
 </div>
 </section>
 
@@ -588,6 +568,6 @@ document.getElementById("regras").classList.add("active");
 }
 
 </script>
-
+   
 </body>
 </html>
