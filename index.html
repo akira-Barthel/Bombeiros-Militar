@@ -408,6 +408,297 @@ Bem-vindo, <strong id="userName"></strong>
 </div>
 </section>
 
+    <section id="sobre" class="section active">
+<div class="card">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galeria Premium - Bombeiros RP</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#090909;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+/* CONTAINER */
+.galeria{
+    width:420px;
+    background:#141414;
+    border-radius:20px;
+    overflow:hidden;
+    position:relative;
+    box-shadow:
+    0 0 15px #ff0000,
+    0 0 30px rgba(255,0,0,.5);
+}
+
+/* EFEITO SIRENE */
+.galeria::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    border:3px solid red;
+    border-radius:20px;
+    animation:sirene 1s infinite;
+    pointer-events:none;
+}
+
+@keyframes sirene{
+    0%,100%{
+        box-shadow:0 0 10px red;
+    }
+    50%{
+        box-shadow:0 0 35px red;
+    }
+}
+
+.topo{
+    background:#b80000;
+    text-align:center;
+    padding:12px;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.slider{
+    position:relative;
+    height:250px;
+    overflow:hidden;
+}
+
+.slide{
+    position:absolute;
+    width:100%;
+    height:100%;
+    opacity:0;
+    transition:1s;
+}
+
+.slide.active{
+    opacity:1;
+}
+
+.slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:0.5s;
+    cursor:pointer;
+}
+
+.slide img:hover{
+    transform:scale(1.05);
+}
+
+/* BOTÕES */
+.btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(0,0,0,.5);
+    border:none;
+    color:white;
+    font-size:25px;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    cursor:pointer;
+    z-index:5;
+}
+
+.btn:hover{
+    background:red;
+}
+
+.prev{
+    left:10px;
+}
+
+.next{
+    right:10px;
+}
+
+/* INDICADORES */
+.indicadores{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    padding:12px;
+}
+
+.dot{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    background:#555;
+    cursor:pointer;
+}
+
+.dot.active{
+    background:red;
+    box-shadow:0 0 10px red;
+}
+
+/* TELA CHEIA */
+.fullscreen{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.95);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+}
+
+.fullscreen img{
+    max-width:90%;
+    max-height:90%;
+    border:4px solid red;
+    border-radius:10px;
+}
+
+.fechar{
+    position:absolute;
+    top:20px;
+    right:30px;
+    color:white;
+    font-size:40px;
+    cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="galeria">
+
+    <div class="topo">
+        🚒 Galeria Oficial Bombeiros RP
+    </div>
+
+    <div class="slider">
+
+        <div class="slide active">
+            <img src="https://picsum.photos/id/1011/800/500">
+        </div>
+
+        <div class="slide">
+            <img src="https://picsum.photos/id/1015/800/500">
+        </div>
+
+        <div class="slide">
+            <img src="https://picsum.photos/id/1025/800/500">
+        </div>
+
+        <div class="slide">
+            <img src="https://picsum.photos/id/1035/800/500">
+        </div>
+
+        <button class="btn prev">❮</button>
+        <button class="btn next">❯</button>
+
+    </div>
+
+    <div class="indicadores"></div>
+
+</div>
+
+<!-- TELA CHEIA -->
+<div class="fullscreen">
+    <span class="fechar">&times;</span>
+    <img src="" id="imgGrande">
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const indicadores = document.querySelector('.indicadores');
+
+let atual = 0;
+
+/* CRIA INDICADORES */
+slides.forEach((_, i)=>{
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+
+    if(i===0) dot.classList.add('active');
+
+    dot.addEventListener('click', ()=>{
+        mostrarSlide(i);
+    });
+
+    indicadores.appendChild(dot);
+});
+
+const dots = document.querySelectorAll('.dot');
+
+function mostrarSlide(index){
+
+    slides[atual].classList.remove('active');
+    dots[atual].classList.remove('active');
+
+    atual = index;
+
+    slides[atual].classList.add('active');
+    dots[atual].classList.add('active');
+}
+
+document.querySelector('.next').onclick = ()=>{
+    mostrarSlide((atual+1)%slides.length);
+};
+
+document.querySelector('.prev').onclick = ()=>{
+    mostrarSlide((atual-1+slides.length)%slides.length);
+};
+
+/* AUTO PLAY */
+setInterval(()=>{
+    mostrarSlide((atual+1)%slides.length);
+},4000);
+
+/* TELA CHEIA */
+const fullscreen = document.querySelector('.fullscreen');
+const imgGrande = document.getElementById('imgGrande');
+
+document.querySelectorAll('.slide img').forEach(img=>{
+
+    img.addEventListener('click', ()=>{
+
+        imgGrande.src = img.src;
+        fullscreen.style.display='flex';
+
+    });
+
+});
+
+document.querySelector('.fechar').onclick = ()=>{
+    fullscreen.style.display='none';
+};
+
+fullscreen.onclick = (e)=>{
+    if(e.target === fullscreen){
+        fullscreen.style.display='none';
+    }
+};
+</script>
+
+</body>
+</html>
+</div>
+</section>
+
 <section id="mapa" class="section">
 <div class="card">
 <h2>🗺️ Mapa Operacional</h2>
