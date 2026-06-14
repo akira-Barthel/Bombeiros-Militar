@@ -408,319 +408,136 @@ Bem-vindo, <strong id="userName"></strong>
 </div>
 </section>
 
-   /* ================= GALERIA PROFISSIONAL ================= */
 
-.galeria{
-    background:#0b0b0b;
-    border-radius:16px;
+* ================= GALERIA CORRIGIDA ================= */
+
+.gallery{
+    margin-top:20px;
+    width:100%;
+    height:420px;
+    display:flex;
+    border-radius:18px;
     overflow:hidden;
-    border:1px solid rgba(255,0,0,.25);
-    box-shadow:0 0 25px rgba(255,0,0,.2);
-}
-
-.topo{
-    background:#b80000;
-    padding:10px;
-    text-align:center;
-    font-weight:bold;
-}
-
-.slider{
+    box-shadow:0 0 35px red;
+    border:1px solid rgba(255,0,0,.3);
     position:relative;
-    height:320px;
-    overflow:hidden;
 }
 
-.slide{
-    position:absolute;
-    inset:0;
-    opacity:0;
-    transition:1s;
+.gallery .image{
+    flex:1;
 }
 
-.slide.active{
-    opacity:1;
-}
-
-.slide img{
+.gallery img{
     width:100%;
     height:100%;
     object-fit:cover;
 }
 
-/* BOTÕES */
+.gallery .text{
+    flex:1;
+    padding:30px;
+    background:rgba(0,0,0,.75);
+}
+
+.gallery h2{
+    color:var(--red);
+}
 
 .btn{
     position:absolute;
     top:50%;
     transform:translateY(-50%);
-    width:42px;
-    height:42px;
-    border-radius:50%;
+    background:red;
     border:none;
-    background:rgba(0,0,0,.5);
-    color:#fff;
+    padding:10px 14px;
     cursor:pointer;
+    border-radius:10px;
 }
 
-.btn:hover{
-    background:var(--red);
+.btn.left{left:10px;}
+.btn.right{right:10px;}
+
+.progress{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:4px;
+    background:rgba(255,255,255,.1);
 }
 
-.prev{left:10px;}
-.next{right:10px;}
-
-/* DOTS */
-
-.indicadores{
-    display:flex;
-    justify-content:center;
-    gap:8px;
-    padding:12px;
-    background:#0b0b0b;
-}
-
-.dot{
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    background:#444;
-    cursor:pointer;
-}
-
-.dot.active{
-    background:var(--red);
-}
-
-/* RESPONSIVO */
-
-@media(max-width:768px){
-    .slider{height:220px;}
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:red;
 }
 
 </style>
 </head>
-
-
-    <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Galeria RP Premium</title>
-
-<style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: radial-gradient(circle, #1a0000, #000);
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  color: white;
-}
-
-/* CONTAINER */
-.gallery {
-  width: 950px;
-  height: 500px;
-  display: flex;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 0 40px red;
-  border: 1px solid rgba(255,0,0,0.4);
-  position: relative;
-  backdrop-filter: blur(10px);
-}
-
-/* IMAGEM */
-.image {
-  flex: 1;
-  position: relative;
-}
-
-.image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  transform: scale(1.05);
-}
-
-/* TEXTO */
-.text {
-  flex: 1;
-  padding: 40px;
-  background: rgba(0,0,0,0.75);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-left: 2px solid rgba(255,0,0,0.4);
-}
-
-.text h2 {
-  color: #ff2b2b;
-  margin-bottom: 10px;
-  font-size: 26px;
-  text-shadow: 0 0 10px red;
-}
-
-.text p {
-  font-size: 16px;
-  line-height: 1.6;
-  opacity: 0.9;
-}
-
-/* BOTÕES */
-.btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255,0,0,0.8);
-  border: none;
-  color: white;
-  font-size: 22px;
-  padding: 12px 16px;
-  cursor: pointer;
-  border-radius: 10px;
-  transition: 0.3s;
-  box-shadow: 0 0 15px red;
-}
-
-.btn:hover {
-  background: red;
-  transform: translateY(-50%) scale(1.1);
-}
-
-.btn.left { left: 15px; }
-.btn.right { right: 15px; }
-
-/* BARRA DE PROGRESSO */
-.progress {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 4px;
-  width: 100%;
-  background: rgba(255,255,255,0.1);
-}
-
-.progress-bar {
-  height: 100%;
-  width: 0%;
-  background: red;
-  transition: width 0.6s ease;
-  box-shadow: 0 0 10px red;
-}
-
-/* ANIMAÇÃO DE ENTRADA */
-.fade {
-  animation: fadeIn 0.6s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(1.1); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-/* RESPONSIVO */
-@media(max-width: 768px) {
-  .gallery {
-    flex-direction: column;
-    width: 95%;
-    height: 80vh;
-  }
-  .text {
-    border-left: none;
-    border-top: 2px solid red;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<div class="gallery">
-
-  <button class="btn left" onclick="prev()">⬅</button>
-
-  <div class="image">
-    <img id="img" class="fade" src="">
-  </div>
-
-  <div class="text">
-    <h2 id="title"></h2>
-    <p id="desc"></p>
-  </div>
-
-  <button class="btn right" onclick="next()">➡</button>
-
-  <div class="progress">
-    <div class="progress-bar" id="bar"></div>
-  </div>
-
-</div>
-
+    
 <script>
-const data = [
-  {
-    img: "https://picsum.photos/900/500?1",
-    title: "Fundação da Corporação",
-    desc: "A corporação nasceu da necessidade de proteger a cidade em tempos de caos e incêndios descontrolados."
-  },
-  {
-    img: "https://picsum.photos/900/500?2",
-    title: "Primeira Missão Real",
-    desc: "O batalhão enfrentou um incêndio de grandes proporções, salvando dezenas de vidas e marcando sua história."
-  },
-  {
-    img: "https://picsum.photos/900/500?3",
-    title: "Expansão e Elite",
-    desc: "A corporação cresceu, tornando-se uma das unidades mais respeitadas e eficientes do estado."
-  }
-];
 
 let index = 0;
 
-function update() {
-  const img = document.getElementById("img");
-  const title = document.getElementById("title");
-  const desc = document.getElementById("desc");
-  const bar = document.getElementById("bar");
+const data = [
+{
+img:"https://picsum.photos/900/500?1",
+title:"Fundação",
+desc:"Início da corporação."
+},
+{
+img:"https://picsum.photos/900/500?2",
+title:"Missão",
+desc:"Primeiro grande resgate."
+},
+{
+img:"https://picsum.photos/900/500?3",
+title:"Elite",
+desc:"Corporação de elite."
+}
+];
 
-  img.classList.remove("fade");
-
-  setTimeout(() => {
-    img.src = data[index].img;
-    title.innerText = data[index].title;
-    desc.innerText = data[index].desc;
-
-    img.classList.add("fade");
-
-    bar.style.width = ((index + 1) / data.length) * 100 + "%";
-  }, 150);
+function update(){
+document.getElementById("img").src = data[index].img;
+document.getElementById("title").textContent = data[index].title;
+document.getElementById("desc").textContent = data[index].desc;
+document.getElementById("bar").style.width = ((index+1)/data.length)*100+"%";
 }
 
-function next() {
-  index = (index + 1) % data.length;
-  update();
-}
-
-function prev() {
-  index = (index - 1 + data.length) % data.length;
-  update();
-}
-
-/* TECLADO */
-document.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowRight") next();
-  if (e.key === "ArrowLeft") prev();
-});
-
-/* INICIAL */
+function next(){
+index = (index+1)%data.length;
 update();
+}
+
+function prev(){
+index = (index-1+data.length)%data.length;
+update();
+}
+
+function showTab(id){
+document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+function login(){
+const name = document.getElementById("name").value;
+if(!name) return;
+localStorage.setItem("user",name);
+document.getElementById("userName").textContent = name;
+document.getElementById("loginScreen").style.display="none";
+document.getElementById("app").style.display="block";
+}
+
+window.onload = ()=>{
+const user = localStorage.getItem("user");
+if(user){
+document.getElementById("userName").textContent=user;
+document.getElementById("loginScreen").style.display="none";
+document.getElementById("app").style.display="block";
+}
+update();
+};
+
 </script>
 
 </body>
