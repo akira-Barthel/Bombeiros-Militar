@@ -1,1 +1,37 @@
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:25px;
+  position:relative;
+  min-height:400px;
+}
 
+.section{
+  position:absolute;
+  width:100%;
+  opacity:0;
+  pointer-events:none;
+
+  transform:
+      translateX(60px)
+      scale(.95);
+
+  filter:blur(6px);
+
+  transition:
+      opacity .45s ease,
+      transform .45s ease,
+      filter .45s ease;
+}
+
+.section.active{
+  position:relative;
+  opacity:1;
+  pointer-events:auto;
+
+  transform:
+      translateX(0)
+      scale(1);
+
+  filter:blur(0);
+}
