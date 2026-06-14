@@ -1,13 +1,33 @@
-<div class="login-overlay" id="login">
-  <div class="login-box">
+body{
+  background:linear-gradient(-45deg,#000,#1a0000,#300000,#000);
+  background-size:400% 400%;
+  animation:bgMove 15s ease infinite;
+  color:#fff;
+  overflow-x:hidden;
+}
 
-    <h2>🚒 ACESSO RESTRITO</h2>
-    <p>Sistema Bombeiros RP</p>
+@keyframes bgMove{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
 
-    <input type="text" placeholder="Usuário">
-    <input type="password" placeholder="Senha">
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,0,0,.08), transparent 30%),
+    radial-gradient(circle at 80% 70%, rgba(255,0,0,.05), transparent 35%);
+  animation:floatingLights 10s ease-in-out infinite alternate;
+  pointer-events:none;
+}
 
-    <button onclick="entrar()">ENTRAR</button>
-
-  </div>
-</div>
+@keyframes floatingLights{
+  from{
+    transform:translateY(0) scale(1);
+  }
+  to{
+    transform:translateY(-20px) scale(1.1);
+  }
+}
