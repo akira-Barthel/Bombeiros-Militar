@@ -1,278 +1,565 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bombeiros RP - Premium HUD</title>
+<title>🚒 Bombeiros RP - Central Operacional</title>
 
 <style>
+
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+:root{
+    --red:#ff2b2b;
+    --dark:#050505;
+    --glass:rgba(255,255,255,.05);
 }
 
 body{
-  color:#fff;
-  background:linear-gradient(135deg,#000,#2a0000,#000);
-  overflow-x:hidden;
+    color:white;
+    min-height:100vh;
+    overflow-x:hidden;
+
+    background:
+    linear-gradient(
+    -45deg,
+    #000,
+    #140000,
+    #300000,
+    #000);
+
+    background-size:400% 400%;
+    animation:bgMove 15s ease infinite;
 }
 
-/* HEADER */
-header{
-  background:rgba(255,0,0,0.8);
-  padding:18px;
-  text-align:center;
-  font-weight:bold;
-  letter-spacing:1px;
-  box-shadow:0 0 20px red;
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
 }
 
-/* NAV */
-nav{
-  display:flex;
-  justify-content:center;
-  gap:12px;
-  padding:12px;
-  background:rgba(0,0,0,0.7);
-  backdrop-filter:blur(10px);
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+
+    background:
+    radial-gradient(circle at 20% 20%, rgba(255,0,0,.08), transparent 30%),
+    radial-gradient(circle at 80% 80%, rgba(255,0,0,.06), transparent 35%);
+
+    animation:lights 10s ease-in-out infinite alternate;
 }
 
-nav button{
-  background:transparent;
-  border:1px solid rgba(255,0,0,0.6);
-  color:#fff;
-  padding:10px 18px;
-  cursor:pointer;
-  border-radius:8px;
-  transition:0.4s;
-  position:relative;
-  overflow:hidden;
+@keyframes lights{
+    from{transform:translateY(0);}
+    to{transform:translateY(-20px);}
 }
 
-/* efeito brilho */
-nav button::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:-100%;
-  width:100%;
-  height:100%;
-  background:linear-gradient(120deg,transparent,rgba(255,0,0,0.4),transparent);
-  transition:0.5s;
+/* FLASH */
+
+#flash{
+    position:fixed;
+    inset:0;
+    background:red;
+    opacity:0;
+    pointer-events:none;
+    z-index:99999;
 }
 
-nav button:hover::before{
-  left:100%;
+.flashActive{
+    animation:flash .45s ease;
 }
 
-nav button:hover{
-  background:red;
-  box-shadow:0 0 15px red;
-  transform:scale(1.05);
-}
-
-/* CONTAINER */
-.container{
-  max-width:950px;
-  margin:auto;
-  padding:25px;
-}
-
-/* ABAS */
-.section{
-  display:none;
-  opacity:0;
-  transform:translateY(20px) scale(0.98);
-  transition:0.5s ease;
-}
-
-/* ativa com animação */
-.section.active{
-  display:block;
-  opacity:1;
-  transform:translateY(0) scale(1);
-}
-
-/* CARD */
-.card{
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,0,0,0.3);
-  padding:18px;
-  margin-top:15px;
-  border-radius:10px;
-  backdrop-filter:blur(10px);
-  box-shadow:0 0 15px rgba(255,0,0,0.2);
-  transition:0.3s;
-}
-
-.card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 0 25px rgba(255,0,0,0.5);
-}
-
-/* TITULO */
-h2{
-  margin-bottom:10px;
-  text-shadow:0 0 10px red;
+@keyframes flash{
+    0%{opacity:0;}
+    30%{opacity:.7;}
+    100%{opacity:0;}
 }
 
 /* LOGIN */
+
 #loginScreen{
-  height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:radial-gradient(circle,#200000,#000);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 .loginBox{
-  width:320px;
-  padding:30px;
-  background:rgba(0,0,0,0.8);
-  border:1px solid red;
-  border-radius:12px;
-  box-shadow:0 0 30px red;
-  text-align:center;
-  animation:pulse 2s infinite;
+    width:350px;
+    padding:30px;
+    text-align:center;
+
+    background:rgba(0,0,0,.8);
+
+    backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,0,0,.3);
+
+    border-radius:15px;
+
+    animation:pulse 2s infinite;
 }
 
 @keyframes pulse{
-  0%{box-shadow:0 0 10px red;}
-  50%{box-shadow:0 0 30px red;}
-  100%{box-shadow:0 0 10px red;}
+    0%{box-shadow:0 0 10px rgba(255,0,0,.4);}
+    50%{box-shadow:0 0 35px rgba(255,0,0,.9);}
+    100%{box-shadow:0 0 10px rgba(255,0,0,.4);}
+}
+
+.loginLogo{
+    font-size:55px;
+    margin-bottom:10px;
+}
+
+.loginBox h1{
+    margin-bottom:20px;
 }
 
 input{
-  width:100%;
-  padding:10px;
-  margin-top:10px;
-  border:none;
-  border-radius:6px;
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    margin-top:10px;
 }
 
-button{
-  width:100%;
-  padding:10px;
-  margin-top:15px;
-  background:red;
-  border:none;
-  color:#fff;
-  cursor:pointer;
-  border-radius:6px;
-  font-weight:bold;
-  transition:0.3s;
+.mainBtn{
+    width:100%;
+    margin-top:15px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+
+    background:var(--red);
+    color:white;
+
+    cursor:pointer;
+    font-weight:bold;
+
+    transition:.3s;
 }
 
-button:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 15px red;
+.mainBtn:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 20px red;
 }
+
+/* APP */
+
+#app{
+    display:none;
+}
+
+/* HEADER */
+
+header{
+    text-align:center;
+    padding:20px;
+
+    background:rgba(255,0,0,.85);
+
+    font-size:24px;
+    font-weight:bold;
+    letter-spacing:2px;
+
+    position:relative;
+    overflow:hidden;
+
+    animation:headerGlow 2s infinite alternate;
+}
+
+@keyframes headerGlow{
+    from{
+        box-shadow:
+        0 0 10px rgba(255,0,0,.4);
+    }
+
+    to{
+        box-shadow:
+        0 0 30px rgba(255,0,0,.8),
+        0 0 60px rgba(255,0,0,.4);
+    }
+}
+
+header::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-150%;
+    width:100%;
+    height:100%;
+
+    background:
+    linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.3),
+    transparent);
+
+    animation:shine 4s linear infinite;
+}
+
+@keyframes shine{
+    to{
+        left:150%;
+    }
+}
+
+.userBar{
+    text-align:center;
+    padding:12px;
+    background:rgba(255,255,255,.04);
+}
+
+/* MENU */
+
+nav{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    padding:15px;
+
+    backdrop-filter:blur(10px);
+}
+
+nav button{
+    padding:12px 18px;
+
+    background:rgba(255,0,0,.08);
+
+    border:1px solid rgba(255,0,0,.2);
+
+    color:white;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+nav button:hover{
+    background:red;
+
+    transform:
+    translateY(-3px)
+    scale(1.05);
+
+    box-shadow:
+    0 0 20px red;
+}
+
+/* CONTAINER */
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:25px;
+
+    min-height:450px;
+
+    position:relative;
+}
+
+/* ABAS */
+
+.section{
+    position:absolute;
+    width:100%;
+
+    opacity:0;
+    pointer-events:none;
+
+    transform:
+    translateX(50px)
+    scale(.95);
+
+    filter:blur(5px);
+
+    transition:
+    opacity .4s,
+    transform .4s,
+    filter .4s;
+}
+
+.section.active{
+    position:relative;
+
+    opacity:1;
+    pointer-events:auto;
+
+    transform:
+    translateX(0)
+    scale(1);
+
+    filter:none;
+}
+
+/* CARDS */
+
+.card{
+    margin-top:15px;
+    padding:20px;
+
+    border-radius:15px;
+
+    background:var(--glass);
+
+    border:1px solid rgba(255,0,0,.25);
+
+    backdrop-filter:blur(15px);
+
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+
+    box-shadow:
+    0 0 30px rgba(255,0,0,.4);
+}
+
+.card h2{
+    margin-bottom:10px;
+}
+
+/* SOM */
+
+#soundBtn{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+
+    width:55px;
+    height:55px;
+
+    border:none;
+    border-radius:50%;
+
+    background:red;
+    color:white;
+
+    cursor:pointer;
+
+    box-shadow:0 0 20px red;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
+<div id="flash"></div>
+
 <div id="loginScreen">
-  <div class="loginBox">
-    <h2>🚒 Bombeiros RP</h2>
-    <input id="name" placeholder="Digite seu nome">
-    <button onclick="login()">Entrar no Sistema</button>
-  </div>
+
+    <div class="loginBox">
+
+        <div class="loginLogo">🚒</div>
+
+        <h1>Bombeiros RP</h1>
+
+        <input
+        type="text"
+        id="name"
+        placeholder="Digite seu nome">
+
+        <button
+        class="mainBtn"
+        onclick="login()">
+        Entrar no Sistema
+        </button>
+
+    </div>
+
 </div>
 
-<!-- SISTEMA -->
-<div id="app" style="display:none;">
+<div id="app">
 
-<header>🚒 CENTRAL OPERACIONAL - BOMBEIROS RP</header>
+<header>
+🚒 CENTRAL OPERACIONAL BOMBEIROS RP
+</header>
+
+<div class="userBar">
+Bem-vindo, <strong id="userName"></strong>
+</div>
 
 <nav>
-  <button onclick="show('sobre')">Corporação</button>
-  <button onclick="show('mapa')">Mapa</button>
-  <button onclick="show('regras')">Regras</button>
-  <button onclick="show('recrutamento')">Recrutamento</button>
+<button onclick="showTab('sobre')">Corporação</button>
+<button onclick="showTab('mapa')">Mapa</button>
+<button onclick="showTab('regras')">Regras</button>
+<button onclick="showTab('recrutamento')">Recrutamento</button>
 </nav>
 
 <div class="container">
 
-<div id="sobre" class="section active">
-  <h2>Corporação</h2>
-  <div class="card">
-    Corpo de Bombeiros RP focado em salvar vidas e atuar em emergências.
-  </div>
+<section id="sobre" class="section active">
+<div class="card">
+<h2>🏢 Corporação</h2>
+<p>Corpo de Bombeiros RP dedicado ao salvamento, atendimento emergencial e proteção da cidade.</p>
+</div>
+</section>
+
+<section id="mapa" class="section">
+<div class="card">
+<h2>🗺️ Mapa Operacional</h2>
+<p>Quartel Central, Hospital Municipal, Bases Avançadas e áreas estratégicas.</p>
+</div>
+</section>
+
+<section id="regras" class="section">
+<div class="card">
+<h2>📜 Regras</h2>
+<p>
+• Respeito à hierarquia<br>
+• Prioridade máxima em emergências<br>
+• Conduta profissional obrigatória<br>
+• Trabalho em equipe
+</p>
+</div>
+</section>
+
+<section id="recrutamento" class="section">
+<div class="card">
+<h2>🧑‍🚒 Recrutamento</h2>
+<p>Junte-se à corporação e faça parte da elite dos Bombeiros RP.</p>
+</div>
+</section>
+
 </div>
 
-<div id="mapa" class="section">
-  <h2>Mapa Operacional</h2>
-  <div class="card">
-    Quartel central, hospital e bases estratégicas da cidade.
-  </div>
-</div>
+<button id="soundBtn" onclick="toggleSound()">🔊</button>
 
-<div id="regras" class="section">
-  <h2>Regras</h2>
-  <div class="card">
-    • Respeito total à hierarquia<br>
-    • Prioridade em emergências<br>
-    • Disciplina operacional obrigatória
-  </div>
-</div>
-
-<div id="recrutamento" class="section">
-  <h2>Recrutamento</h2>
-  <div class="card">
-    Faça parte da elite dos bombeiros RP da cidade.
-  </div>
-</div>
-
-</div>
 </div>
 
 <script>
 
+let soundEnabled = true;
+let audioCtx = null;
+
+function initAudio(){
+    if(!audioCtx){
+        audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+    }
+}
+
+function playSiren(){
+
+    if(!soundEnabled) return;
+
+    initAudio();
+
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    osc.type = "sine";
+
+    osc.frequency.setValueAtTime(
+        550,
+        audioCtx.currentTime
+    );
+
+    osc.frequency.exponentialRampToValueAtTime(
+        350,
+        audioCtx.currentTime + 0.5
+    );
+
+    gain.gain.setValueAtTime(
+        0.04,
+        audioCtx.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        audioCtx.currentTime + 0.6
+    );
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.6);
+}
+
+function flash(){
+
+    const f = document.getElementById("flash");
+
+    f.classList.remove("flashActive");
+
+    void f.offsetWidth;
+
+    f.classList.add("flashActive");
+}
+
+function showTab(id){
+
+    playSiren();
+    flash();
+
+    document
+    .querySelectorAll(".section")
+    .forEach(sec=>{
+        sec.classList.remove("active");
+    });
+
+    requestAnimationFrame(()=>{
+        document
+        .getElementById(id)
+        .classList
+        .add("active");
+    });
+}
+
 function login(){
-  let name = document.getElementById("name").value;
 
-  if(!name){
-    alert("Digite seu nome");
-    return;
-  }
+    const name =
+    document
+    .getElementById("name")
+    .value
+    .trim();
 
-  localStorage.setItem("user", name);
+    if(!name){
+        alert("Digite seu nome.");
+        return;
+    }
 
-  document.getElementById("loginScreen").style.opacity = "0";
+    localStorage.setItem("user",name);
 
-  setTimeout(()=>{
-    document.getElementById("loginScreen").style.display = "none";
-    document.getElementById("app").style.display = "block";
-  },400);
+    document.getElementById("userName").textContent=name;
+
+    document.getElementById("loginScreen").style.display="none";
+    document.getElementById("app").style.display="block";
 }
 
-/* ANIMAÇÃO DE ABAS MELHORADA */
-function show(id){
-  let sections = document.querySelectorAll(".section");
+function toggleSound(){
 
-  sections.forEach(sec=>{
-    sec.classList.remove("active");
-  });
+    soundEnabled = !soundEnabled;
 
-  let target = document.getElementById(id);
-
-  // força reflow pra animação reiniciar
-  void target.offsetWidth;
-
-  target.classList.add("active");
+    document.getElementById("soundBtn").textContent =
+    soundEnabled ? "🔊" : "🔇";
 }
 
-/* AUTO LOGIN */
-window.onload = function(){
-  if(localStorage.getItem("user")){
-    document.getElementById("loginScreen").style.display = "none";
-    document.getElementById("app").style.display = "block";
-  }
-}
+window.onload = ()=>{
+
+    const user = localStorage.getItem("user");
+
+    if(user){
+
+        document.getElementById("userName").textContent=user;
+
+        document.getElementById("loginScreen").style.display="none";
+        document.getElementById("app").style.display="block";
+    }
+};
 
 </script>
 
