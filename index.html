@@ -401,100 +401,52 @@ Bem-vindo, <strong id="userName"></strong>
 
 <div class="container">
 
+<!-- CORPORAÇÃO + GALERIA -->
 <section id="sobre" class="section active">
+
 <div class="card">
 <h2>🏢 Corporação</h2>
-<p>Corpo de Bombeiros Militar dedicado ao salvamento, atendimento emergencial e proteção da cidade.</p>
+<p>Corpo de Bombeiros Militar dedicado ao salvamento e proteção.</p>
 </div>
+
+<div class="gallery">
+
+<button class="btn left" onclick="prev()">⬅</button>
+
+<div class="image">
+<img id="img">
+</div>
+
+<div class="text">
+<h2 id="title"></h2>
+<p id="desc"></p>
+</div>
+
+<button class="btn right" onclick="next()">➡</button>
+
+<div class="progress">
+<div id="bar" class="progress-bar"></div>
+</div>
+
+</div>
+
 </section>
 
+<section id="mapa" class="section"><div class="card"><h2>Mapa Operacional</h2></div></section>
+<section id="regras" class="section"><div class="card"><h2>Regras</h2></div></section>
+<section id="recrutamento" class="section"><div class="card"><h2>Recrutamento</h2></div></section>
 
-* ================= GALERIA CORRIGIDA ================= */
+</div>
+</div>
 
-.gallery{
-    margin-top:20px;
-    width:100%;
-    height:420px;
-    display:flex;
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:0 0 35px red;
-    border:1px solid rgba(255,0,0,.3);
-    position:relative;
-}
-
-.gallery .image{
-    flex:1;
-}
-
-.gallery img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.gallery .text{
-    flex:1;
-    padding:30px;
-    background:rgba(0,0,0,.75);
-}
-
-.gallery h2{
-    color:var(--red);
-}
-
-.btn{
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
-    background:red;
-    border:none;
-    padding:10px 14px;
-    cursor:pointer;
-    border-radius:10px;
-}
-
-.btn.left{left:10px;}
-.btn.right{right:10px;}
-
-.progress{
-    position:absolute;
-    bottom:0;
-    left:0;
-    width:100%;
-    height:4px;
-    background:rgba(255,255,255,.1);
-}
-
-.progress-bar{
-    height:100%;
-    width:0%;
-    background:red;
-}
-
-</style>
-</head>
-    
 <script>
 
 let index = 0;
 
 const data = [
-{
-img:"https://picsum.photos/900/500?1",
-title:"Fundação",
-desc:"Início da corporação."
-},
-{
-img:"https://picsum.photos/900/500?2",
-title:"Missão",
-desc:"Primeiro grande resgate."
-},
-{
-img:"https://picsum.photos/900/500?3",
-title:"Elite",
-desc:"Corporação de elite."
-}
+{img:"https://picsum.photos/900/500?1", title:"Fundação", desc:"Início da corporação."},
+{img:"https://picsum.photos/900/500?2", title:"Missão", desc:"Primeiro grande resgate."},
+{img:"https://picsum.photos/900/500?3", title:"Elite", desc:"Corporação de elite."}
 ];
 
 function update(){
@@ -520,16 +472,16 @@ document.getElementById(id).classList.add("active");
 }
 
 function login(){
-const name = document.getElementById("name").value;
+const name=document.getElementById("name").value.trim();
 if(!name) return;
 localStorage.setItem("user",name);
-document.getElementById("userName").textContent = name;
+document.getElementById("userName").textContent=name;
 document.getElementById("loginScreen").style.display="none";
 document.getElementById("app").style.display="block";
 }
 
-window.onload = ()=>{
-const user = localStorage.getItem("user");
+window.onload=()=>{
+const user=localStorage.getItem("user");
 if(user){
 document.getElementById("userName").textContent=user;
 document.getElementById("loginScreen").style.display="none";
