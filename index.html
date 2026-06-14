@@ -3,353 +3,165 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🚒 Bombeiros Militar - Central Operacional</title>
+<title>Bombeiros RP - Sistema Oficial Completo</title>
 
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
-}
-
-:root{
-    --red:#ff2b2b;
-    --dark:#050505;
-    --glass:rgba(255,255,255,.05);
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
 }
 
 body{
-    color:white;
-    min-height:100vh;
-    overflow-x:hidden;
-
-    background:
-    linear-gradient(
-    -45deg,
-    #000,
-    #140000,
-    #300000,
-    #000);
-
-    background-size:400% 400%;
-    animation:bgMove 15s ease infinite;
-}
-
-@keyframes bgMove{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-}
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-
-    background:
-    radial-gradient(circle at 20% 20%, rgba(255,0,0,.08), transparent 30%),
-    radial-gradient(circle at 80% 80%, rgba(255,0,0,.06), transparent 35%);
-
-    animation:lights 10s ease-in-out infinite alternate;
-}
-
-@keyframes lights{
-    from{transform:translateY(0);}
-    to{transform:translateY(-20px);}
-}
-
-/* FLASH */
-
-#flash{
-    position:fixed;
-    inset:0;
-    background:red;
-    opacity:0;
-    pointer-events:none;
-    z-index:99999;
-}
-
-.flashActive{
-    animation:flash .45s ease;
-}
-
-@keyframes flash{
-    0%{opacity:0;}
-    30%{opacity:.7;}
-    100%{opacity:0;}
-}
-
-/* LOGIN */
-
-#loginScreen{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.loginBox{
-    width:350px;
-    padding:30px;
-    text-align:center;
-
-    background:rgba(0,0,0,.8);
-
-    backdrop-filter:blur(15px);
-
-    border:1px solid rgba(255,0,0,.3);
-
-    border-radius:15px;
-
-    animation:pulse 2s infinite;
-}
-
-@keyframes pulse{
-    0%{box-shadow:0 0 10px rgba(255,0,0,.4);}
-    50%{box-shadow:0 0 35px rgba(255,0,0,.9);}
-    100%{box-shadow:0 0 10px rgba(255,0,0,.4);}
-}
-
-.loginLogo{
-    font-size:55px;
-    margin-bottom:10px;
-}
-
-.loginBox h1{
-    margin-bottom:20px;
-}
-
-input{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:10px;
-    margin-top:10px;
-}
-
-.mainBtn{
-    width:100%;
-    margin-top:15px;
-    padding:12px;
-    border:none;
-    border-radius:10px;
-
-    background:var(--red);
-    color:white;
-
-    cursor:pointer;
-    font-weight:bold;
-
-    transition:.3s;
-}
-
-.mainBtn:hover{
-    transform:scale(1.05);
-    box-shadow:0 0 20px red;
-}
-
-/* APP */
-
-#app{
-    display:none;
+background:#0a0a0a;
+color:#fff;
 }
 
 /* HEADER */
-
 header{
-    text-align:center;
-    padding:20px;
-
-    background:rgba(255,0,0,.85);
-
-    font-size:24px;
-    font-weight:bold;
-    letter-spacing:2px;
-
-    position:relative;
-    overflow:hidden;
-
-    animation:headerGlow 2s infinite alternate;
+background:#b30000;
+padding:18px;
+text-align:center;
+font-weight:bold;
+letter-spacing:2px;
+box-shadow:0 0 20px rgba(255,0,0,.4);
 }
 
-@keyframes headerGlow{
-    from{
-        box-shadow:
-        0 0 10px rgba(255,0,0,.4);
-    }
-
-    to{
-        box-shadow:
-        0 0 30px rgba(255,0,0,.8),
-        0 0 60px rgba(255,0,0,.4);
-    }
-}
-
-header::after{
-    content:"";
-    position:absolute;
-    top:0;
-    left:-150%;
-    width:100%;
-    height:100%;
-
-    background:
-    linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,.3),
-    transparent);
-
-    animation:shine 4s linear infinite;
-}
-
-@keyframes shine{
-    to{
-        left:150%;
-    }
-}
-
-.userBar{
-    text-align:center;
-    padding:12px;
-    background:rgba(255,255,255,.04);
-}
-
-/* MENU */
-
+/* NAV */
 nav{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:10px;
-    padding:15px;
-
-    backdrop-filter:blur(10px);
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:8px;
+padding:12px;
+background:#111;
+border-bottom:1px solid rgba(255,0,0,.2);
 }
 
 nav button{
-    padding:12px 18px;
-
-    background:rgba(255,0,0,.08);
-
-    border:1px solid rgba(255,0,0,.2);
-
-    color:white;
-
-    border-radius:12px;
-
-    cursor:pointer;
-
-    transition:.3s;
+padding:9px 12px;
+border:none;
+border-radius:6px;
+background:#1a1a1a;
+color:#fff;
+cursor:pointer;
+transition:.3s;
+font-size:13px;
+border:1px solid rgba(255,0,0,.2);
 }
 
 nav button:hover{
-    background:red;
-
-    transform:
-    translateY(-3px)
-    scale(1.05);
-
-    box-shadow:
-    0 0 20px red;
+background:#b30000;
+transform:scale(1.05);
 }
 
 /* CONTAINER */
-
 .container{
-    max-width:1100px;
-    margin:auto;
-    padding:25px;
-
-    min-height:450px;
-
-    position:relative;
+max-width:1100px;
+margin:auto;
+padding:20px;
 }
 
-/* ABAS */
-
+/* SEÇÕES */
 .section{
-    position:absolute;
-    width:100%;
-
-    opacity:0;
-    pointer-events:none;
-
-    transform:
-    translateX(50px)
-    scale(.95);
-
-    filter:blur(5px);
-
-    transition:
-    opacity .4s,
-    transform .4s,
-    filter .4s;
+display:none;
+animation:fade .25s ease;
 }
 
 .section.active{
-    position:relative;
-
-    opacity:1;
-    pointer-events:auto;
-
-    transform:
-    translateX(0)
-    scale(1);
-
-    filter:none;
+display:block;
 }
 
-/* CARDS */
+@keyframes fade{
+from{opacity:0; transform:translateY(8px);}
+to{opacity:1; transform:translateY(0);}
+}
 
+/* CARD */
 .card{
-    margin-top:15px;
-    padding:20px;
-
-    border-radius:15px;
-
-    background:var(--glass);
-
-    border:1px solid rgba(255,0,0,.25);
-
-    backdrop-filter:blur(15px);
-
-    transition:.3s;
+background:#141414;
+padding:18px;
+border-radius:10px;
+border:1px solid rgba(255,0,0,.2);
+margin-bottom:15px;
 }
 
-.card:hover{
-    transform:translateY(-5px);
-
-    box-shadow:
-    0 0 30px rgba(255,0,0,.4);
+/* GRID */
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:12px;
 }
 
-.card h2{
-    margin-bottom:10px;
+/* BOX */
+.box{
+background:#101010;
+border:1px solid rgba(255,0,0,.2);
+border-radius:10px;
+overflow:hidden;
+cursor:pointer;
+transition:.3s;
 }
 
-/* SOM */
+.box:hover{
+transform:translateY(-5px);
+box-shadow:0 0 15px rgba(255,0,0,.3);
+}
 
-#soundBtn{
-    position:fixed;
-    right:20px;
-    bottom:20px;
+.box img{
+width:100%;
+height:150px;
+object-fit:cover;
+}
 
-    width:55px;
-    height:55px;
+.box .txt{
+padding:12px;
+}
 
-    border:none;
-    border-radius:50%;
+.box h3{
+color:#ff3b3b;
+margin-bottom:5px;
+font-size:15px;
+}
 
-    background:red;
-    color:white;
+.box p{
+font-size:13px;
+opacity:.8;
+line-height:1.4;
+}
 
-    cursor:pointer;
+/* BUTTON */
+.backBtn{
+padding:10px 15px;
+border:none;
+border-radius:6px;
+background:#b30000;
+color:#fff;
+cursor:pointer;
+margin-top:10px;
+}
 
-    box-shadow:0 0 20px red;
+/* BIG IMAGE */
+.bigImg{
+width:100%;
+border-radius:10px;
+margin-bottom:10px;
+}
+
+.subBtn{
+padding:8px 12px;
+margin:5px;
+background:#1a1a1a;
+border:1px solid rgba(255,0,0,.2);
+color:#fff;
+cursor:pointer;
+border-radius:6px;
+}
+
+.subBtn:hover{
+background:#b30000;
 }
 
 </style>
@@ -357,307 +169,275 @@ nav button:hover{
 
 <body>
 
-<div id="flash"></div>
-
-<div id="loginScreen">
-
-    <div class="loginBox">
-
-        <div class="loginLogo">🚒</div>
-
-        <h1>Bombeiros RP</h1>
-
-        <input
-        type="text"
-        id="name"
-        placeholder="Digite seu nome">
-
-        <button
-        class="mainBtn"
-        onclick="login()">
-        Entrar no Sistema
-        </button>
-
-    </div>
-
-</div>
-
-<div id="app">
-
 <header>
-🚒 CENTRAL OPERACIONAL BOMBEIROS MILITAR
+🚒 BOMBEIROS RP - SISTEMA OFICIAL COMPLETO
 </header>
 
-<div class="userBar">
-Bem-vindo, <strong id="userName"></strong>
-</div>
-
 <nav>
-<button onclick="showTab('sobre')">Corporação</button>
-<button onclick="showTab('mapa')">Mapa</button>
-<button onclick="showTab('regras')">Regras</button>
-<button onclick="showTab('recrutamento')">Recrutamento</button>
+<button onclick="tab('historia')">📜 História</button>
+<button onclick="tab('veiculos')">🚒 Veículos</button>
+<button onclick="tab('dat')">🪂 DAT</button>
+<button onclick="tab('galeria')">🖼️ Galeria</button>
+<button onclick="tab('regras')">📜 Regras</button>
+<button onclick="tab('fit')">🧑‍🚒 FIT</button>
 </nav>
 
 <div class="container">
 
-<!-- CORPORAÇÃO + GALERIA -->
-<section id="sobre" class="section active">
+<!-- ================= HISTÓRIA ================= -->
+<section id="historia" class="section active">
 
 <div class="card">
-<h2>🏢 Corporação</h2>
-<p>Corpo de Bombeiros Militar dedicado ao salvamento e proteção.</p>
+<h2>📜 História da Corporação</h2>
+<p>O Corpo de Bombeiros RP foi criado para salvamento e combate a incêndios dentro do RP.</p>
 </div>
 
-<div class="gallery">
-
-<button class="btn left" onclick="prev()">⬅</button>
-
-<div class="image">
-<img id="img">
+<div class="card">
+<img class="bigImg" src="https://picsum.photos/900/400?1">
+<h3>Fundação</h3>
+<p>Início da corporação com foco em resgate e operações emergenciais.</p>
 </div>
 
-<div class="text">
-<h2 id="title"></h2>
-<p id="desc"></p>
+<div class="card">
+<img class="bigImg" src="https://picsum.photos/900/400?2">
+<h3>Expansão</h3>
+<p>Crescimento da estrutura e criação de novas bases.</p>
 </div>
 
-<button class="btn right" onclick="next()">➡</button>
+<div class="card">
+<img class="bigImg" src="https://picsum.photos/900/400?3">
+<h3>Atualidade</h3>
+<p>Corporação altamente treinada e ativa em operações complexas.</p>
+</div>
 
-<div class="progress">
-<div id="bar" class="progress-bar"></div>
+</section>
+
+<!-- ================= VEÍCULOS ================= -->
+<section id="veiculos" class="section">
+
+<div class="card">
+<h2>🚒 Frota Operacional</h2>
+<p>Selecione um veículo:</p>
+
+<button class="subBtn" onclick="openCar('ab1')">Auto Bomba 1</button>
+<button class="subBtn" onclick="openCar('ab2')">Auto Bomba 2</button>
+<button class="subBtn" onclick="openCar('resgate')">Resgate</button>
+<button class="subBtn" onclick="openCar('ambulancia')">Ambulância</button>
+<button class="subBtn" onclick="openCar('heli')">Helicóptero</button>
+<button class="subBtn" onclick="openCar('comando')">Comando</button>
+<button class="subBtn" onclick="openCar('apoio')">Apoio</button>
+
+</div>
+
+<div id="ab1" class="card car">
+<img class="bigImg" src="https://picsum.photos/900/400?10">
+<h3>Auto Bomba 1</h3>
+<p>Principal veículo de combate a incêndios urbanos.</p>
+</div>
+
+<div id="ab2" class="card car" style="display:none;">
+<img class="bigImg" src="https://picsum.photos/900/400?11">
+<h3>Auto Bomba 2</h3>
+<p>Suporte em grandes operações.</p>
+</div>
+
+<div id="resgate" class="card car" style="display:none;">
+<img class="bigImg" src="https://picsum.photos/900/400?12">
+<h3>Resgate</h3>
+<p>Atendimento rápido em acidentes.</p>
+</div>
+
+<div id="ambulancia" class="card car" style="display:none;">
+<img class="bigImg" src="https://picsum.photos/900/400?13">
+<h3>Ambulância</h3>
+<p>Suporte médico emergencial.</p>
+</div>
+
+<div id="heli" class="card car" style="display:none;">
+<img class="bigImg" src="https://picsum.photos/900/400?14">
+<h3>Helicóptero</h3>
+<p>Resgate aéreo e operações especiais.</p>
+</div>
+
+<div id="comando" class="card car" style="display:none;">
+<img class="bigImg" src="https://picsum.photos/900/400?15">
+<h3>Comando</h3>
+<p>Coordenação das operações.</p>
+</div>
+
+<div id="apoio" class="card car" style="display:none;">
+<img class="bigImg" src="https://picsum.photos/900/400?16">
+<h3>Apoio</h3>
+<p>Logística e transporte.</p>
+</div>
+
+</section>
+
+<!-- ================= DAT ================= -->
+<section id="dat" class="section">
+
+<div class="card">
+<h2>🪂 DAT - Divisão Aérea Tática</h2>
+<img class="bigImg" src="https://picsum.photos/900/400?20">
+<p>Unidade especializada em resgates aéreos e operações de alto risco.</p>
+</div>
+
+</section>
+
+<!-- ================= GALERIA ================= -->
+<section id="galeria" class="section">
+
+<div class="card">
+<h2>🖼️ Galeria Institucional</h2>
+</div>
+
+<div class="grid">
+
+<script>
+for(let i=1;i<=10;i++){
+document.write(`
+<div class="box">
+<img src="https://picsum.photos/500/300?${i+30}">
+<div class="txt">
+<h3>Operação ${i}</h3>
+<p>Registro operacional da corporação.</p>
+</div>
+</div>
+`);
+}
+</script>
+
+</div>
+
+</section>
+
+<!-- ================= REGRAS ================= -->
+<section id="regras" class="section">
+
+<div class="card">
+<h2>📜 Regras Internas</h2>
+<p>Escolha uma categoria:</p>
+</div>
+
+<div class="grid">
+
+<div class="box" onclick="openSub('comandos')">
+<img src="https://picsum.photos/500/300?10">
+<div class="txt">
+<h3>📟 Comandos</h3>
+</div>
+</div>
+
+<div class="box" onclick="openSub('vendas')">
+<img src="https://picsum.photos/500/300?11">
+<div class="txt">
+<h3>🧾 Vendas</h3>
+</div>
+</div>
+
+<div class="box" onclick="openSub('patentes')">
+<img src="https://picsum.photos/500/300?12">
+<div class="txt">
+<h3>🪖 Patentes</h3>
+</div>
 </div>
 
 </div>
 
 </section>
 
-<section id="mapa" class="section"><div class="card"><h2>Mapa Operacional</h2></div></section>
-<section id="regras" class="section"><div class="card"><h2>Regras</h2></div></section>
-<section id="recrutamento" class="section"><div class="card"><h2>Recrutamento</h2></div></section>
+<!-- ================= FIT ================= -->
+<section id="fit" class="section">
+
+<div class="card">
+<h2>🧑‍🚒 FIT</h2>
+<p>Selecione uma área:</p>
+</div>
+
+<div class="grid">
+
+<div class="box" onclick="openFit('fit_rec')">
+<img src="https://picsum.photos/500/300?60">
+<div class="txt"><h3>Recrutadores</h3></div>
+</div>
+
+<div class="box" onclick="openFit('fit_ins')">
+<img src="https://picsum.photos/500/300?61">
+<div class="txt"><h3>Instrutores</h3></div>
+</div>
 
 </div>
+
+</section>
+
+<!-- ================= FIT RECRUTADORES ================= -->
+<section id="fit_rec" class="section">
+<div class="card">
+<h2>🧑‍🚒 Recrutadores FIT</h2>
+<img class="bigImg" src="https://picsum.photos/900/400?70">
+<p>Avaliadores responsáveis por selecionar novos membros da corporação.</p>
+<button class="backBtn" onclick="backFit()">⬅ Voltar</button>
+</div>
+</section>
+
+<!-- ================= FIT INSTRUTORES ================= -->
+<section id="fit_ins" class="section">
+<div class="card">
+<h2>🎓 Instrutores FIT</h2>
+<img class="bigImg" src="https://picsum.photos/900/400?71">
+<p>Responsáveis por treinamentos e capacitação operacional.</p>
+<button class="backBtn" onclick="backFit()">⬅ Voltar</button>
+</div>
+</section>
+
+<!-- ================= SUB ================= -->
+<section id="comandos" class="section">
+<div class="card">
+<h2>📟 Comandos</h2>
+<p>/radio /resgate /sirene /chamar /relatorio</p>
+<button class="backBtn" onclick="back()">⬅ Voltar</button>
+</div>
+</section>
+
+<section id="vendas" class="section">
+<div class="card">
+<h2>🧾 Vendas</h2>
+<p>Sistema de materiais e solicitações internas.</p>
+<button class="backBtn" onclick="back()">⬅ Voltar</button>
+</div>
+</section>
+
+<section id="patentes" class="section">
+<div class="card">
+<h2>🪖 Hierarquia</h2>
+<p>Comandante → Sub → Oficiais → Sargentos → Cabos → Recrutas</p>
+<button class="backBtn" onclick="back()">⬅ Voltar</button>
+</div>
+</section>
+
 </div>
 
 <script>
 
-let index = 0;
-
-const data = [
-{img:"https://picsum.photos/900/500?1", title:"Fundação", desc:"Início da corporação."},
-{img:"https://picsum.photos/900/500?2", title:"Missão", desc:"Primeiro grande resgate."},
-{img:"https://picsum.photos/900/500?3", title:"Elite", desc:"Corporação de elite."}
-];
-
-function update(){
-document.getElementById("img").src = data[index].img;
-document.getElementById("title").textContent = data[index].title;
-document.getElementById("desc").textContent = data[index].desc;
-document.getElementById("bar").style.width = ((index+1)/data.length)*100+"%";
-}
-
-function next(){
-index = (index+1)%data.length;
-update();
-}
-
-function prev(){
-index = (index-1+data.length)%data.length;
-update();
-}
-
-function showTab(id){
+function tab(id){
 document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
 document.getElementById(id).classList.add("active");
 }
 
-function login(){
-const name=document.getElementById("name").value.trim();
-if(!name) return;
-localStorage.setItem("user",name);
-document.getElementById("userName").textContent=name;
-document.getElementById("loginScreen").style.display="none";
-document.getElementById("app").style.display="block";
+function openCar(id){
+document.querySelectorAll(".car").forEach(c=>c.style.display="none");
+document.getElementById(id).style.display="block";
 }
 
-window.onload=()=>{
-const user=localStorage.getItem("user");
-if(user){
-document.getElementById("userName").textContent=user;
-document.getElementById("loginScreen").style.display="none";
-document.getElementById("app").style.display="block";
-}
-update();
-};
-
-</script>
-
-</body>
-</html>
-
-<section id="mapa" class="section">
-<div class="card">
-<h2>🗺️ Mapa Operacional</h2>
-<p>Quartel Central, Hospital Municipal, Bases Avançadas e áreas estratégicas.</p>
-</div>
-</section>
-
-<section id="regras" class="section">
-<div class="card">
-<h2>📜 Regras gerais do serviço:</h2>
-<p>
-• Respeito aos civis acima de qualquer coisa.<br>
-• Respeitar a hierarquia entre os oficiais.<br>
-• Utilização de armamento apenas com porte legal.<br>
-• Nunca aponte armas de fogo para outros oficiais.<br>
-• Armamento letal deve ser utilizado apenas em situações de risco de morte.<br> 
-• Todos os chamados aceitos devem ser atendidos.<br> 
-• É proibida a cobrança de valores diferentes do que foi estabelecido pela prefeitura ou pelas regras.<br>
-• É proibido dar carona ou transportar civis, exceto até uma garagem próxima (em caso de necessidade) ou até o Hospital ("HP").<br>
-• Ao estar fardado, o oficial deve manter postura condizente com sua função. O respeito começa pela própria conduta.<br>
-• Conflitos ou desentendimentos entre oficiais devem ser comunicados aos superiores.<br>
-• É proibido o abuso de serviço.<br> 
-• Não entre em serviço apenas para usufruto de algum poder.<br> 
-• É proibido ficar próximo a ações esperando o término delas.<br> 
-• É proibido receber chamados via celular particular.<br> 
-• O atendimento deve ser igual para todos, sem favorecimento.<br>
-</p>
-</div>
-</section>
-
-<section id="recrutamento" class="section">
-<div class="card">
-<h2>🧑‍🚒 Recrutamento</h2>
-<p>Junte-se à corporação e faça parte da elite dos Bombeiros RP.</p>
-</div>
-</section>
-
-</div>
-
-<button id="soundBtn" onclick="toggleSound()">🔊</button>
-
-</div>
-
-<script>
-
-let soundEnabled = true;
-let audioCtx = null;
-
-function initAudio(){
-    if(!audioCtx){
-        audioCtx = new(window.AudioContext || window.webkitAudioContext)();
-    }
+function openSub(id){
+document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
 }
 
-function playSiren(){
-
-    if(!soundEnabled) return;
-
-    initAudio();
-
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-
-    osc.type = "sine";
-
-    osc.frequency.setValueAtTime(
-        550,
-        audioCtx.currentTime
-    );
-
-    osc.frequency.exponentialRampToValueAtTime(
-        350,
-        audioCtx.currentTime + 0.5
-    );
-
-    gain.gain.setValueAtTime(
-        0.04,
-        audioCtx.currentTime
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-        0.001,
-        audioCtx.currentTime + 0.6
-    );
-
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.6);
+function back(){
+document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+document.getElementById("regras").classList.add("active");
 }
-
-function flash(){
-
-    const f = document.getElementById("flash");
-
-    f.classList.remove("flashActive");
-
-    void f.offsetWidth;
-
-    f.classList.add("flashActive");
-}
-
-function showTab(id){
-
-    playSiren();
-    flash();
-
-    document
-    .querySelectorAll(".section")
-    .forEach(sec=>{
-        sec.classList.remove("active");
-    });
-
-    requestAnimationFrame(()=>{
-        document
-        .getElementById(id)
-        .classList
-        .add("active");
-    });
-}
-
-function login(){
-
-    const name =
-    document
-    .getElementById("name")
-    .value
-    .trim();
-
-    if(!name){
-        alert("Digite seu nome.");
-        return;
-    }
-
-    localStorage.setItem("user",name);
-
-    document.getElementById("userName").textContent=name;
-
-    document.getElementById("loginScreen").style.display="none";
-    document.getElementById("app").style.display="block";
-}
-
-function toggleSound(){
-
-    soundEnabled = !soundEnabled;
-
-    document.getElementById("soundBtn").textContent =
-    soundEnabled ? "🔊" : "🔇";
-}
-
-window.onload = ()=>{
-
-    const user = localStorage.getItem("user");
-
-    if(user){
-
-        document.getElementById("userName").textContent=user;
-
-        document.getElementById("loginScreen").style.display="none";
-        document.getElementById("app").style.display="block";
-    }
-};
 
 </script>
 
