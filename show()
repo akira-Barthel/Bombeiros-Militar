@@ -1,1 +1,18 @@
+function show(id){
 
+  playSiren?.();
+  flash?.();
+
+  document
+    .querySelectorAll(".section")
+    .forEach(sec=>{
+      sec.classList.remove("active");
+    });
+
+  requestAnimationFrame(()=>{
+    document
+      .getElementById(id)
+      .classList
+      .add("active");
+  });
+}
